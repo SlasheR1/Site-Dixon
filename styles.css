@@ -481,6 +481,85 @@ a:hover {
   color: var(--color-accent);
 }
 
+.contacts__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+}
+.contacts__actions .btn {
+  animation: none;
+  opacity: 1;
+}
+.btn--tg {
+  background: #0088cc;
+  color: #fff;
+}
+.btn--tg:hover {
+  background: #006699;
+}
+.btn--max {
+  background: #7c3aed;
+  color: #fff;
+}
+.btn--max:hover {
+  background: #6d28d9;
+}
+
+/* Плавающие кнопки мессенджеров */
+.float-messenger {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 50;
+}
+.float-messenger__btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.float-messenger__icon {
+  width: 26px;
+  height: 26px;
+}
+.float-messenger__icon--img {
+  object-fit: contain;
+}
+.float-messenger__btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.35);
+}
+.float-messenger__btn--tg {
+  background: #0088cc;
+}
+.float-messenger__btn--max {
+  background: #7c3aed;
+}
+.float-messenger__btn--max:hover {
+  background: #6d28d9;
+}
+
+@media (max-width: 768px) {
+  .contacts__actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  .contacts__actions .btn {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
 /* Footer */
 .footer {
   padding: 32px 0;

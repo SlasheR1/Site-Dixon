@@ -144,8 +144,12 @@ const SERIES_LABELS = {
 };
 
 function getPricesBySeries() {
+  // Данные из админки (localStorage) приоритетнее — их подставляет app.js в window.PRICE_DATA
+  const data = (typeof window !== 'undefined' && window.PRICE_DATA && Array.isArray(window.PRICE_DATA))
+    ? window.PRICE_DATA
+    : PRICE_DATA;
   const bySeries = {};
-  PRICE_DATA.forEach((row) => {
+  data.forEach((row) => {
     const s = getSeries(row.model);
     if (!bySeries[s]) bySeries[s] = [];
     bySeries[s].push(row);

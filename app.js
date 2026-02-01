@@ -1,6 +1,12 @@
 (function () {
   'use strict';
 
+  // ——— Цены из админки (localStorage) переопределяют data/prices.js ———
+  try {
+    var saved = localStorage.getItem('dixon_prices');
+    if (saved) window.PRICE_DATA = JSON.parse(saved);
+  } catch (e) {}
+
   // ——— Бургер-меню ———
   var burger = document.querySelector('.burger');
   var navMobile = document.querySelector('.nav-mobile');
