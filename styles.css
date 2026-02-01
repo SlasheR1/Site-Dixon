@@ -652,3 +652,56 @@ a:hover {
     text-align: center;
   }
 }
+
+/* Стили для карты */
+.map {
+  padding: 80px 0;
+  background: var(--color-surface);
+}
+
+.map .section-title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.map__description {
+  text-align: center;
+  color: var(--color-text-muted);
+  max-width: 600px;
+  margin: 0 auto 40px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.map__wrapper {
+  width: 100%;
+}
+
+.map__container {
+  height: 500px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+/* Адаптивность для карты */
+@media (max-width: 768px) {
+  .map__container {
+    height: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .map {
+    padding: 60px 0;
+  }
+  
+  .map__container {
+    height: 300px;
+  }
+  
+  .map__description {
+    font-size: 1rem;
+    margin-bottom: 30px;
+  }
+}

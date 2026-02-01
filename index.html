@@ -186,6 +186,16 @@
       </div>
     </section>
 
+    <section class="map">
+      <div class="container">
+        <h2 class="section-title">Мы на карте</h2>
+        <p class="map__description">Наш сервисный центр удобно расположен в центре Чебоксар. Приезжайте к нам для качественного ремонта вашего устройства.</p>
+        <div class="map__wrapper">
+          <div id="yandex-map" class="map__container"></div>
+        </div>
+      </div>
+    </section>
+
     <div class="float-messenger" aria-hidden="true">
       <a href="https://t.me/dixon_sc" target="_blank" rel="noopener" class="float-messenger__btn float-messenger__btn--tg" title="Telegram" aria-label="Написать в Telegram">
         <svg class="float-messenger__icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
@@ -209,5 +219,51 @@
 
   <script src="data/prices.js"></script>
   <script src="app.js"></script>
+  <script src="https://api-maps.yandex.ru/2.1/?apikey=ваш_ключ_api&lang=ru_RU" type="text/javascript"></script>
+  <script>
+    // Инициализация Яндекс Карты
+    document.addEventListener('DOMContentLoaded', function() {
+      if (typeof ymaps !== 'undefined') {
+        ymaps.ready(initMap);
+      } else {
+        console.error('Yandex Maps API не загружен');
+      }
+    });
+
+    function initMap() {
+      const mapElement = document.getElementById('yandex-map');
+      if (!mapElement) return;
+
+      // Точные координаты для ул. Калинина, 91к1, Чебоксары
+      const coordinates = [56.140364,47.267985];
+      
+      const map = new ymaps.Map('yandex-map', {
+        center: coordinates,
+        zoom: 16,
+        controls: ['zoomControl', 'fullscreenControl', 'typeSelector', 'geolocationControl']
+      });
+
+      // Добавляем метку с кастомной иконкой
+      const placemark = new ymaps.Placemark(coordinates, {
+        balloonContentHeader: '<strong>Сервисный центр DIXON</strong>',
+        balloonContentBody: 'Чебоксары, ул. Калинина, 91к1<br>Телефон: <a href="tel:+78352364202">+7 (8352) 364-202</a>',
+        balloonContentFooter: 'Режим работы: Пн-Пт 9:00-19:00, Сб-Вс 10:00-17:00',
+        hintContent: 'Сервисный центр DIXON'
+      }, {
+        preset: 'islands#greenDotIconWithCaption',
+        iconColor: '#22c55e'
+      });
+
+      map.geoObjects.add(placemark);
+      
+      // Открываем балун при клике на метку
+      placemark.events.add('click', function() {
+        placemark.balloon.open();
+      });
+      
+      // Добавляем масштабирование для мобильных устройств
+      map.behaviors.enable('multiTouch');
+    }
+  </script>
 </body>
 </html>
